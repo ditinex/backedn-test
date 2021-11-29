@@ -1,0 +1,2 @@
+
+exports.Home = require('./HomeController');

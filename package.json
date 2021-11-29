@@ -9,7 +9,7 @@
   },
   "scripts": {
     "test": "jest",
-    "start": "HTTPS=true nodemon server.js"
+    "start": "node server.js"
   },
   "jest": {
     "testEnvironment": "node"

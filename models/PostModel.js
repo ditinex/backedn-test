@@ -8,6 +8,9 @@ const PostSchema = new Schema({
 	parmalink_url: { type: String, trim: true },
 	created_time: { type: Date },
 	insight: { type: Object },
+	reaction_summary:{ type: Array },
+	comment_summary:{ type: Array },
+	share_summary:{ type: Array }
 },{ timestamps: true })
 
 const PostModel = mongoose.model('posts', PostSchema)

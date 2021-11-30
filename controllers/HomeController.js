@@ -107,19 +107,23 @@ module.exports = {
 			for (const post of data) {
 
 				let reactions = 0
+				let reactionData = []
 				let comments = 0
+				let commentsData = []
 
 				let graphApiUrl = 'https://graph.facebook.com/v12.0/'+post.post_id+'/reactions?summary=total_count&access_token=' + isExists.access_token
 				let response = await axios.get(graphApiUrl)
 				
 				if(response.data && response.data.summary && response.data.summary.total_count){
 					reactions = response.data.summary.total_count
+					reactionData = response.data.data
 				}
 
 				graphApiUrl = 'https://graph.facebook.com/v12.0/'+post.post_id+'/comments?summary=total_count&access_token=' + isExists.access_token
 				response = await axios.get(graphApiUrl)
 				if(response.data && response.data.summary && response.data.summary.total_count){
 					comments = response.data.summary.total_count
+					commentsData = response.data.data
 				}
 
 				updatedData = await FindAndUpdate({
@@ -130,7 +134,9 @@ module.exports = {
 							insight:{
 								reactions: reactions,
 								comments: comments
-							}
+							},
+							reaction_summary: reactionData,
+							comment_summary: commentsData,
 						}
 					}
 				})
